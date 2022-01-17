@@ -53,3 +53,8 @@ Space Invader sur carte :
 
 `cd implem && make help`
 
+
+
+Début du Read me : 
+Description des étapes.
+
