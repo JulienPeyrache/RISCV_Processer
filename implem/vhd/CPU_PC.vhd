@@ -200,10 +200,15 @@ when S_LUI =>
 
 when S_ADDI =>
     --rd <- rs1 + immI
-    cmd.ALU_Y_sel <= ALU_Y_immI
-    cmd.ALU_op <= ALU_plus
-    cmd.DATA_sel <= DATA_from_alu
-    cmd.RF_we <= '1'
+    cmd.ALU_Y_sel <= ALU_Y_immI;
+    cmd.ALU_op <= ALU_plus;
+    cmd.DATA_sel <= DATA_from_alu;
+    cmd.RF_we <= '1';
+    cmd.mem_ce <= '1';    
+    --next state
+    state_d <= S_Fetch;
+
+    
 ---------- Instructions arithmétiques et logiques ----------
 
 ---------- Instructions de saut ----------
