@@ -161,30 +161,22 @@ begin
                 cmd.IR_we <= '1';
                 state_d <= S_Decode;
 
+
             when S_Decode =>
-                -- PC <- PC + 4
-                cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
-                cmd.PC_sel <= PC_from_pc;
-                cmd.PC_we <= '1';
-
-                state_d <= S_Init;
-
-                -- Décodage effectif des instructions,
-                -- à compléter par vos soins
+                -- On peut aussi utiliser un case, ...
+                -- et ne pas le faire juste pour les branchements et auipc
+                if status.IR(6 downto 0) = "0110111" then
+                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                    cmd.PC_sel <= PC_from_pc;
+                    cmd.PC_we <= '0'; 
+                    state_d <= S_LUI;
+                else
+                    state_d <= S_Error; -- Pour detecter les rates du decodage
+                end if;
 
 ---------- Instructions avec immediat de type U ----------
 
-when S_Decode =>
-    -- On peut aussi utiliser un case, ...
-    -- et ne pas le faire juste pour les branchements et auipc
-    if status.IR(6 downto 0) = "0110111" then
-        cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
-        cmd.PC_sel <= PC_from_pc;
-        cmd.PC_we <= '0'; 
-        state_d <= S_LUI;
-    else
-        state_d <= S_Error; -- Pour detecter les rates du decodage
-    end if;
+
 
 when S_LUI =>
     -- rd <- ImmU + 0
