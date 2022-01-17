@@ -198,6 +198,12 @@ when S_LUI =>
     -- next state
     state_d <= S_Fetch;
 
+when S_ADDI =>
+    --rd <- rs1 + immI
+    cmd.ALU_Y_sel <= ALU_Y_immI
+    cmd.ALU_op <= ALU_plus
+    cmd.DATA_sel <= DATA_from_alu
+    cmd.RF_we <= '1'
 ---------- Instructions arithmétiques et logiques ----------
 
 ---------- Instructions de saut ----------
