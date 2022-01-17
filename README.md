@@ -56,5 +56,9 @@ Space Invader sur carte :
 
 
 Début du Read me : 
+
+Dans la ligne de commande, il faut changer la source : source /tools/Xilinx/Vivado/2019.1/settings64.sh
 Description des étapes.
+Ajout de certaines valeurs.
+Ajout du fichier addi.s à l'aide de git.
 
