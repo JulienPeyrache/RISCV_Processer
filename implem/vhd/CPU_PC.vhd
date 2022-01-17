@@ -113,8 +113,8 @@ begin
         cmd.PC_we             <= 'U';
         cmd.PC_sel            <= UNDEFINED;
 
-        cmd.PC_X_sel          <= UNDEFINED;
-        cmd.PC_Y_sel          <= UNDEFINED;
+        cmd.PC_X_sel          <= PC_X_pc;
+        cmd.PC_Y_sel          <= PC_Y_immU;
 
         cmd.TO_PC_Y_sel       <= UNDEFINED;
 
@@ -179,7 +179,7 @@ when S_Decode =>
     if status.IR(6 downto 0) = "0110111" then
         cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
         cmd.PC_sel <= PC_from_pc;
-        cmd.PC_we <= 0;
+        cmd.PC_we <= True; Est censé être True
         state_d <= S_LUI;
     else
         state_d <= S_Error; -- Pour detecter les rates du decodage
@@ -189,12 +189,12 @@ when S_LUI =>
     -- rd <- ImmU + 0
     cmd.PC_X_sel <= PC_X_cst_x00;
     cmd.PC_Y_sel <= PC_Y_immU;
-    cmd.RF_we <= 0;
+    cmd.RF_we <= 1; #pareil faut mettre True
     cmd.DATA_sel <= DATA_from_pc;
     -- lecture mem[PC]
     cmd.ADDR_sel <= ADDR_from_pc;
-    cmd.mem_ce <= 0;
-    cmd.mem_we <= 1;
+    cmd.mem_ce <= 1;    #pour moi faut le mettre à True
+    cmd.mem_we <= 0;    #pour moi faut le mettre à True
     -- next state
     state_d <= S_Fetch;
 
