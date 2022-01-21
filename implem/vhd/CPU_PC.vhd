@@ -200,8 +200,8 @@ when S_LUI =>
     -- rd <- ImmU + 0
     cmd.PC_X_sel <= PC_X_cst_x00;
     cmd.PC_Y_sel <= PC_Y_immU;
-    cmd.RF_we <= '1'; 
     cmd.DATA_sel <= DATA_from_pc;
+    cmd.RF_we <= '1'; 
     -- lecture mem[PC]
     cmd.ADDR_sel <= ADDR_from_pc;
     cmd.mem_ce <= '1';
