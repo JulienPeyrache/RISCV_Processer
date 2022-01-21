@@ -214,8 +214,8 @@ when S_ADDI =>
 
 --AUIPC rd, imm : R[rd] = PC + (imm << 12)
 when S_AUIPC =>
-    cmd.PC_X_sel <= PC_X_pc
-    cmd.PC_Y_sel <= PC_Y_immU
+    cmd.PC_X_sel <= PC_X_pc;
+    cmd.PC_Y_sel <= PC_Y_immU;
     cmd.RF_we <= '1'
     cmd.DATA_sel <= DATA_from_pc
     --PC take the value
