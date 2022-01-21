@@ -256,6 +256,8 @@ when S_SLL =>
     cmd.ADDR_sel<= ADDR_from_pc;
     cmd.mem_ce <= '1';
     cmd.mem_we <= '0';
+    --Next state
+    state_d <= S_Fetch;
 
 when S_SRL =>
     --select rs2
@@ -269,6 +271,8 @@ when S_SRL =>
     cmd.ADDR_sel<= ADDR_from_pc;
     cmd.mem_ce <= '1';
     cmd.mem_we <= '0';
+    --Next state
+    state_d <= S_Fetch;
 
 when S_SRA =>
     --select rs2
@@ -282,6 +286,8 @@ when S_SRA =>
     cmd.ADDR_sel<= ADDR_from_pc;
     cmd.mem_ce <= '1';
     cmd.mem_we <= '0';
+    --Next state
+    state_d <= S_Fetch;
 
 when S_SRAI =>
     --select rs2
@@ -295,6 +301,9 @@ when S_SRAI =>
     cmd.ADDR_sel<= ADDR_from_pc;
     cmd.mem_ce <= '1';
     cmd.mem_we <= '0';
+    --Next state
+    state_d <= S_Fetch;
+
 
 when S_SLLI =>
     --select rs2
@@ -308,6 +317,8 @@ when S_SLLI =>
     cmd.ADDR_sel<= ADDR_from_pc ;
     cmd.mem_ce <= '1';
     cmd.mem_we <= '0';
+    --Next state
+    state_d <= S_Fetch;
 
 when S_SRLI =>
     --select rs2
@@ -321,16 +332,26 @@ when S_SRLI =>
     cmd.ADDR_sel<= ADDR_from_pc;
     cmd.mem_ce <= '1';
     cmd.mem_we <= '0';
+    --Next state
+    state_d <= S_Fetch;
 
 when S_AND =>
     cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
     cmd.LOGICAL_op <= LOGICAL_and;
-    cmd.DATA_sel <= DATA_from_logical
+    cmd.DATA_sel <= DATA_from_logical;
     -- then in the register
     cmd.RF_we <= '1';
     --Next state
-    state_d <= S_Fetch
+    state_d <= S_Fetch;
 
+when S_OR =>
+    cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
+    cmd.LOGICAL_op <= LOGICAL_or;
+    cmd.DATA_sel <= DATA_from_logical;
+    -- then in the register
+    cmd.RF_we <= '1';
+    --Next state
+    state_d <= S_Fetch;
 
 
 
