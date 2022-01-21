@@ -21,6 +21,9 @@ entity CPU_PC is
     );
 end entity;
 
+
+--syntaxe modifiée
+
 architecture RTL of CPU_PC is
     type State_type is (
         S_Error,
@@ -29,7 +32,7 @@ architecture RTL of CPU_PC is
         S_Fetch,
         S_Decode,
         S_LUI,
-        S_ADDI
+        S_ADDI,
         S_ADD,
         S_AUIPC,
         S_SLL,
@@ -245,7 +248,7 @@ when S_SLL =>
     --select rs2
     cmd.SHIFTER_Y_sel<=SHIFTER_Y_rs2;
     --select addition
-    cmd.SHIFTER_op<=SHIFT_ll;
+    cmd.SHIFTER_op <= SHIFT_ll;
     --rd <- rs1+rs2
     cmd.RF_we <= '1';
     cmd.DATA_sel <= DATA_from_shifter;
