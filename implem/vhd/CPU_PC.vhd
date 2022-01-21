@@ -208,7 +208,7 @@ when S_AUIPC =>
 
 
 
-    
+
 ---------- Instructions arithmétiques et logiques ----------
 
 when S_ADD=>
@@ -237,29 +237,29 @@ when S_SLL =>
 
 when S_SRL =>
     --select rs2
-cmd.SHIFTER_Y_sel<=SHIFTER_Y_rs2;
+    cmd.SHIFTER_Y_sel<=SHIFTER_Y_rs2;
     --select addition
-cmd.SHIFTER_op<=SHIFT_rl;
+    cmd.SHIFTER_op<=SHIFT_rl;
     --rd <- rs1+rs2
-cmd.RF_we <= '1';
-cmd.DATA_sel <= DATA_from_shifter;
+    cmd.RF_we <= '1';
+    cmd.DATA_sel <= DATA_from_shifter;
     --lecture mem[PC]
-cmd.ADDR_sel<= ADDR_from_pc
-cmd.mem_ce <= '1';
-cmd.mem_we <= '0';
+    cmd.ADDR_sel<= ADDR_from_pc
+    cmd.mem_ce <= '1';
+    cmd.mem_we <= '0';
 
 when S_SRA =>
     --select rs2
-cmd.SHIFTER_Y_sel<=SHIFTER_Y_rs2;
+    cmd.SHIFTER_Y_sel<=SHIFTER_Y_rs2;
     --select addition
-cmd.SHIFTER_op<=SHIFT_ra;
+    cmd.SHIFTER_op<=SHIFT_ra;
     --rd <- rs1+rs2
-cmd.RF_we <= '1';
-cmd.DATA_sel <= DATA_from_shifter;
+    cmd.RF_we <= '1';
+    cmd.DATA_sel <= DATA_from_shifter;
     --lecture mem[PC]
-cmd.ADDR_sel<= ADDR_from_pc
-cmd.mem_ce <= '1';
-cmd.mem_we <= '0';
+    cmd.ADDR_sel<= ADDR_from_pc
+    cmd.mem_ce <= '1';
+    cmd.mem_we <= '0';
 
 when S_SRAI =>
     --select rs2
