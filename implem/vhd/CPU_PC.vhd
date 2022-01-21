@@ -233,8 +233,8 @@ when S_AUIPC =>
 when S_ADD=>
     --rd <- rs1 + rs2
     cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
-    cmd.ALUP_op <= ALU_plus;
-    cmd.DAT_sel <= DATA_from_alu;
+    cmd.ALU_op <= ALU_plus;
+    cmd.DATA_sel <= DATA_from_alu;
     cmd.RF_we <= '1';
     cmd.mem_ce <= '1';
     --next state
