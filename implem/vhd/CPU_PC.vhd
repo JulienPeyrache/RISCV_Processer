@@ -21,6 +21,9 @@ entity CPU_PC is
     );
 end entity;
 
+
+--syntaxe modifiée
+
 architecture RTL of CPU_PC is
     type State_type is (
         S_Error,
@@ -29,7 +32,7 @@ architecture RTL of CPU_PC is
         S_Fetch,
         S_Decode,
         S_LUI,
-        S_ADDI
+        S_ADDI,
         S_ADD,
         S_AUIPC,
         S_SLL,
@@ -38,8 +41,7 @@ architecture RTL of CPU_PC is
         S_SRAI,
         S_SRL,
         S_SRLI,
-
-            );
+        );
 
     signal state_d, state_q : State_type;
     signal cmd_cs : PO_cs_cmd;
@@ -234,8 +236,8 @@ when S_AUIPC =>
 when S_ADD=>
     --rd <- rs1 + rs2
     cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
-    cmd.ALUP_op <= ALU_plus;
-    cmd.DAT_sel <= DATA_from_alu;
+    cmd.ALU_op <= ALU_plus;
+    cmd.DATA_sel <= DATA_from_alu;
     cmd.RF_we <= '1';
     cmd.mem_ce <= '1';
     --next state
@@ -246,12 +248,12 @@ when S_SLL =>
     --select rs2
     cmd.SHIFTER_Y_sel<=SHIFTER_Y_rs2;
     --select addition
-    cmd.SHIFTER_op<=SHIFT_ll;
+    cmd.SHIFTER_op <= SHIFT_ll;
     --rd <- rs1+rs2
     cmd.RF_we <= '1';
     cmd.DATA_sel <= DATA_from_shifter;
     --lecture mem[PC]
-    cmd.ADDR_sel<= ADDR_from_pc
+    cmd.ADDR_sel<= ADDR_from_pc;
     cmd.mem_ce <= '1';
     cmd.mem_we <= '0';
 
@@ -264,7 +266,7 @@ when S_SRL =>
     cmd.RF_we <= '1';
     cmd.DATA_sel <= DATA_from_shifter;
     --lecture mem[PC]
-    cmd.ADDR_sel<= ADDR_from_pc
+    cmd.ADDR_sel<= ADDR_from_pc;
     cmd.mem_ce <= '1';
     cmd.mem_we <= '0';
 
@@ -277,7 +279,7 @@ when S_SRA =>
     cmd.RF_we <= '1';
     cmd.DATA_sel <= DATA_from_shifter;
     --lecture mem[PC]
-    cmd.ADDR_sel<= ADDR_from_pc
+    cmd.ADDR_sel<= ADDR_from_pc;
     cmd.mem_ce <= '1';
     cmd.mem_we <= '0';
 
@@ -290,7 +292,7 @@ when S_SRAI =>
     cmd.RF_we <= '1';
     cmd.DATA_sel <= DATA_from_shifter;
     --lecture mem[PC]
-    cmd.ADDR_sel<= ADDR_from_pc
+    cmd.ADDR_sel<= ADDR_from_pc;
     cmd.mem_ce <= '1';
     cmd.mem_we <= '0';
 
@@ -303,8 +305,8 @@ when S_SLLI =>
     cmd.RF_we <= '1';
     cmd.DATA_sel <= DATA_from_shifter;
     --lecture mem[PC]
-    cmd.ADDR_sel<= ADDR_from_pc 
-    md.mem_ce <= '1';
+    cmd.ADDR_sel<= ADDR_from_pc ;
+    cmd.mem_ce <= '1';
     cmd.mem_we <= '0';
 
 when S_SRLI =>
@@ -314,9 +316,9 @@ when S_SRLI =>
     cmd.SHIFTER_op<=SHIFT_rl;
     --rd <- rs1+rs2
     cmd.RF_we <= '1';
-    md.DATA_sel <= DATA_from_shifter;
+    cmd.DATA_sel <= DATA_from_shifter;
     --lecture mem[PC]
-    cmd.ADDR_sel<= ADDR_from_pc
+    cmd.ADDR_sel<= ADDR_from_pc;
     cmd.mem_ce <= '1';
     cmd.mem_we <= '0';
 
