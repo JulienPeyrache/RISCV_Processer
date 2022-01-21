@@ -201,6 +201,13 @@ when S_ADDI =>
     --next state
     state_d <= S_Fetch;
 
+--AUIPC rd, imm : R[rd] = PC + (imm << 12)
+when S_AUIPC =>
+    cmd.PC_X_sel <= PC_X_pc
+    cmd.PC_Y_sel <= PC_Y_immU
+
+
+
     
 ---------- Instructions arithmétiques et logiques ----------
 
