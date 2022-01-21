@@ -253,7 +253,7 @@ when S_SLL =>
     cmd.RF_we <= '1';
     cmd.DATA_sel <= DATA_from_shifter;
     --lecture mem[PC]
-    cmd.ADDR_sel<= ADDR_from_pc
+    cmd.ADDR_sel<= ADDR_from_pc;
     cmd.mem_ce <= '1';
     cmd.mem_we <= '0';
 
@@ -266,7 +266,7 @@ when S_SRL =>
     cmd.RF_we <= '1';
     cmd.DATA_sel <= DATA_from_shifter;
     --lecture mem[PC]
-    cmd.ADDR_sel<= ADDR_from_pc
+    cmd.ADDR_sel<= ADDR_from_pc;
     cmd.mem_ce <= '1';
     cmd.mem_we <= '0';
 
@@ -279,7 +279,7 @@ when S_SRA =>
     cmd.RF_we <= '1';
     cmd.DATA_sel <= DATA_from_shifter;
     --lecture mem[PC]
-    cmd.ADDR_sel<= ADDR_from_pc
+    cmd.ADDR_sel<= ADDR_from_pc;
     cmd.mem_ce <= '1';
     cmd.mem_we <= '0';
 
@@ -292,7 +292,7 @@ when S_SRAI =>
     cmd.RF_we <= '1';
     cmd.DATA_sel <= DATA_from_shifter;
     --lecture mem[PC]
-    cmd.ADDR_sel<= ADDR_from_pc
+    cmd.ADDR_sel<= ADDR_from_pc;
     cmd.mem_ce <= '1';
     cmd.mem_we <= '0';
 
@@ -305,8 +305,8 @@ when S_SLLI =>
     cmd.RF_we <= '1';
     cmd.DATA_sel <= DATA_from_shifter;
     --lecture mem[PC]
-    cmd.ADDR_sel<= ADDR_from_pc 
-    md.mem_ce <= '1';
+    cmd.ADDR_sel<= ADDR_from_pc ;
+    cmd.mem_ce <= '1';
     cmd.mem_we <= '0';
 
 when S_SRLI =>
@@ -316,9 +316,9 @@ when S_SRLI =>
     cmd.SHIFTER_op<=SHIFT_rl;
     --rd <- rs1+rs2
     cmd.RF_we <= '1';
-    md.DATA_sel <= DATA_from_shifter;
+    cmd.DATA_sel <= DATA_from_shifter;
     --lecture mem[PC]
-    cmd.ADDR_sel<= ADDR_from_pc
+    cmd.ADDR_sel<= ADDR_from_pc;
     cmd.mem_ce <= '1';
     cmd.mem_we <= '0';
 
