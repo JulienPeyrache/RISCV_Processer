@@ -205,7 +205,7 @@ when S_LUI =>
     -- lecture mem[PC]
     cmd.ADDR_sel <= ADDR_from_pc;
     cmd.mem_ce <= '1';    
-    cmd.mem_we <= '0';    
+    cmd.mem_we <= '1';    
     -- next state
     state_d <= S_Fetch;
 
@@ -251,7 +251,6 @@ when S_ADD=>
     state_d <= S_Fetch;
 
 When S_SUB =>
-    when S_ADD=>
     --rd <- rs1 - rs2
     cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
     cmd.ALU_op <= ALU_minus;
