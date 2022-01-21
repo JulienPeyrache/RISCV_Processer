@@ -322,6 +322,18 @@ when S_SRLI =>
     cmd.mem_ce <= '1';
     cmd.mem_we <= '0';
 
+when S_AND =>
+    cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
+    cmd.LOGICAL_op <= LOGICAL_and;
+    cmd.DATA_sel <= DATA_from_logical
+    -- then in the register
+    cmd.RF_we <= '1';
+    --Next state
+    state_d <= S_Fetch
+
+
+
+
 ---------- Instructions de saut ----------
 
 ---------- Instructions de chargement à partir de la mémoire ----------
