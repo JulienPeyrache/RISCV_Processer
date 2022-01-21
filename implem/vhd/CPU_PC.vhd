@@ -35,8 +35,9 @@ architecture RTL of CPU_PC is
         S_SLL,
         S_SLLI,
         S_SRA,
-        S_SRAI
-
+        S_SRAI,
+        S_SRL,
+        S_SRLI,
 
     );
 
