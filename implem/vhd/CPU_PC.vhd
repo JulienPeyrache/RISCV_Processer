@@ -40,7 +40,7 @@ architecture RTL of CPU_PC is
         S_SRA,
         S_SRAI,
         S_SRL,
-        S_SRLI,
+        S_SRLI
         );
 
     signal state_d, state_q : State_type;
@@ -216,12 +216,12 @@ when S_ADDI =>
 when S_AUIPC =>
     cmd.PC_X_sel <= PC_X_pc;
     cmd.PC_Y_sel <= PC_Y_immU;
-    cmd.RF_we <= '1'
-    cmd.DATA_sel <= DATA_from_pc
+    cmd.DATA_sel <= DATA_from_pc;
+    cmd.RF_we <= '1';
     --PC take the value
     cmd.ADDR_sel <= ADDR_from_pc;
     cmd.mem_ce <= '1';    
-    cmd.mem_we <= '0';    
+    cmd.mem_we <= '1';    
     -- next state
     state_d <= S_Fetch;
 
@@ -241,7 +241,19 @@ when S_ADD=>
     cmd.RF_we <= '1';
     cmd.mem_ce <= '1';
     --next state
-    state_d <= S_Fetch
+    state_d <= S_Fetch;
+
+When S_SUB =>
+    when S_ADD=>
+    --rd <- rs1 - rs2
+    cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
+    cmd.ALU_op <= ALU_minus;
+    cmd.DATA_sel <= DATA_from_alu;
+    cmd.RF_we <= '1';
+    cmd.mem_ce <= '1';
+    --next state
+    state_d <= S_Fetch;
+
 
 
 when S_SLL =>
@@ -353,6 +365,33 @@ when S_OR =>
     --Next state
     state_d <= S_Fetch;
 
+
+when S_ORI =>
+    cmd.ALU_Y_sel <= ALU_Y_immI;
+    cmd.LOGICAL_op <= LOGICAL_or;
+    cmd.DATA_sel <= DATA_from_logical;
+    -- then in the register
+    cmd.RF_we <= '1';
+    --Next state
+    state_d <= S_Fetch;
+
+when S_XOR =>
+    cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
+    cmd.LOGICAL_op <= LOGICAL_xor;
+    cmd.DATA_sel <= DATA_from_logical;
+    -- then in the register
+    cmd.RF_we <= '1';
+    --Next state
+    state_d <= S_Fetch;
+
+when S_XORI =>
+    cmd.ALU_Y_sel <= ALU_Y_immI;
+    cmd.LOGICAL_op <= LOGICAL_xor;
+    cmd.DATA_sel <= DATA_from_logical;
+    -- then in the register
+    cmd.RF_we <= '1';
+    --Next state
+    state_d <= S_Fetch;
 
 
 ---------- Instructions de saut ----------
