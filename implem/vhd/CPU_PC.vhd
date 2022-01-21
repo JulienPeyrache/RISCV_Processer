@@ -381,9 +381,9 @@ when S_OR =>
     --Next state
     state_d <= S_Fetch;
 
-ALU_Y_immI
+
 when S_ORI =>
-    cmd.ALU_Y_sel <= ;
+    cmd.ALU_Y_sel <= ALU_Y_immI ;
     cmd.LOGICAL_op <= LOGICAL_or;
     cmd.DATA_sel <= DATA_from_logical;
     -- then in the register
