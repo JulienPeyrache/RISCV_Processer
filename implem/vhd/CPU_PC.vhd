@@ -204,6 +204,95 @@ when S_ADDI =>
     
 ---------- Instructions arithmétiques et logiques ----------
 
+when S_ADD=>
+    --rd <- rs1 + rs2
+    cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
+    cmd.ALUP_op <= ALU_plus;
+    cmd.DAT_sel <= DATA_from_alu;
+    cmd.RF_we <= '1';
+    cmd.mem_ce <= '1';
+    --next state
+    state_d <= S_Fetch
+
+
+when S_SLL =>
+    --select rs2
+    cmd.SHIFTER_Y_sel<=SHIFTER_Y_rs2;
+    --select addition
+    cmd.SHIFTER_op<=SHIFT_ll;
+    --rd <- rs1+rs2
+    cmd.RF_we <= '1';
+    cmd.DATA_sel <= DATA_from_shifter;
+    --lecture mem[PC]
+    cmd.ADDR_sel<= ADDR_from_pc
+    cmd.mem_ce <= '1';
+    cmd.mem_we <= '0';
+
+when S_SRL =>
+    --select rs2
+cmd.SHIFTER_Y_sel<=SHIFTER_Y_rs2;
+    --select addition
+cmd.SHIFTER_op<=SHIFT_rl;
+    --rd <- rs1+rs2
+cmd.RF_we <= '1';
+cmd.DATA_sel <= DATA_from_shifter;
+    --lecture mem[PC]
+cmd.ADDR_sel<= ADDR_from_pc
+cmd.mem_ce <= '1';
+cmd.mem_we <= '0';
+
+when S_SRA =>
+    --select rs2
+cmd.SHIFTER_Y_sel<=SHIFTER_Y_rs2;
+    --select addition
+cmd.SHIFTER_op<=SHIFT_ra;
+    --rd <- rs1+rs2
+cmd.RF_we <= '1';
+cmd.DATA_sel <= DATA_from_shifter;
+    --lecture mem[PC]
+cmd.ADDR_sel<= ADDR_from_pc
+cmd.mem_ce <= '1';
+cmd.mem_we <= '0';
+
+when S_SRAI =>
+    --select rs2
+    cmd.SHIFTER_Y_sel<=SHIFTER_Y_ir_sh;
+    --select addition
+    cmd.SHIFTER_op<=SHIFT_ra;
+    --rd <- rs1+rs2
+    cmd.RF_we <= '1';
+    cmd.DATA_sel <= DATA_from_shifter;
+    --lecture mem[PC]
+    cmd.ADDR_sel<= ADDR_from_pc
+    cmd.mem_ce <= '1';
+    cmd.mem_we <= '0';
+
+when S_SLLI =>
+    --select rs2
+    cmd.SHIFTER_Y_sel<=SHIFTER_Y_ir_sh;
+    --select addition
+    cmd.SHIFTER_op<=SHIFT_ll;
+    --rd <- rs1+rs2
+    cmd.RF_we <= '1';
+    cmd.DATA_sel <= DATA_from_shifter;
+    --lecture mem[PC]
+    cmd.ADDR_sel<= ADDR_from_pc 
+    md.mem_ce <= '1';
+    cmd.mem_we <= '0';
+
+when S_SRLI =>
+    --select rs2
+    cmd.SHIFTER_Y_sel<=SHIFTER_Y_ir_sh;
+    --select addition
+    cmd.SHIFTER_op<=SHIFT_rl;
+    --rd <- rs1+rs2
+    cmd.RF_we <= '1';
+    md.DATA_sel <= DATA_from_shifter;
+    --lecture mem[PC]
+    cmd.ADDR_sel<= ADDR_from_pc
+    cmd.mem_ce <= '1';
+    cmd.mem_we <= '0';
+
 ---------- Instructions de saut ----------
 
 ---------- Instructions de chargement à partir de la mémoire ----------
