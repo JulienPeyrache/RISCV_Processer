@@ -205,7 +205,11 @@ when S_LUI =>
     -- lecture mem[PC]
     cmd.ADDR_sel <= ADDR_from_pc;
     cmd.mem_ce <= '1';    
+<<<<<<< HEAD
     cmd.mem_we <= '';    
+=======
+    cmd.mem_we <= '1';    
+>>>>>>> 2a524fe41add58ed7d2983c82a20735b1fca79e1
     -- next state
     state_d <= S_Fetch;
 

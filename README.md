@@ -57,6 +57,8 @@ Space Invader sur carte :
 
 Début du Read me : 
 
+Se placer dans le implem
+
 Dans la ligne de commande, il faut changer la source : source /tools/Xilinx/Vivado/2019.1/settings64.sh
 Description des étapes.
 Ajout de certaines valeurs.
