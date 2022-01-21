@@ -40,7 +40,14 @@ architecture RTL of CPU_PC is
         S_SRA,
         S_SRAI,
         S_SRL,
-        S_SRLI
+        S_SRLI,
+        S_SUB,
+        S_AND,
+        S_ANDI,
+        S_OR,
+        S_ORI,
+        S_XOR,
+        S_XORI
         );
 
     signal state_d, state_q : State_type;
@@ -356,6 +363,15 @@ when S_AND =>
     --Next state
     state_d <= S_Fetch;
 
+when S_ANDI =>
+    cmd.ALU_Y_sel <= ALU_Y_immI;
+    cmd.LOGICAL_op <= LOGICAL_and;
+    cmd.DATA_sel <= DATA_from_logical;
+    -- then in the register
+    cmd.RF_we <= '1';
+    --Next state
+    state_d <= S_Fetch;
+
 when S_OR =>
     cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
     cmd.LOGICAL_op <= LOGICAL_or;
@@ -365,9 +381,9 @@ when S_OR =>
     --Next state
     state_d <= S_Fetch;
 
-
+ALU_Y_immI
 when S_ORI =>
-    cmd.ALU_Y_sel <= ALU_Y_immI;
+    cmd.ALU_Y_sel <= ;
     cmd.LOGICAL_op <= LOGICAL_or;
     cmd.DATA_sel <= DATA_from_logical;
     -- then in the register
