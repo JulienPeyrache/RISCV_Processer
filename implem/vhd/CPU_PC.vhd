@@ -142,7 +142,7 @@ begin
 
         cmd.IR_we             <= 'U';
 
-        cmd.ADDR_sel          <= UNDEFINED;
+        cmd.ADDR_sel          <= ADDR_from_pc;
         cmd.mem_we            <= 'U';
         cmd.mem_ce            <= 'U';
 
