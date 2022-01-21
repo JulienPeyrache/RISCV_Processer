@@ -29,7 +29,15 @@ architecture RTL of CPU_PC is
         S_Fetch,
         S_Decode,
         S_LUI,
-        S_ADDI
+        S_ADDI,
+        S_ADD,
+        S_AUIPC,
+        S_SLL,
+        S_SLLI,
+        S_SRA,
+        S_SRAI
+
+
     );
 
     signal state_d, state_q : State_type;
