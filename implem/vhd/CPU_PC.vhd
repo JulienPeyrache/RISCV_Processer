@@ -247,32 +247,11 @@ begin
 				        if section31_25 = "0000000" then
 				    	     state_d <= S_SLL;
 				       end if;
-                               elsif section14_12 = "010" then
-                                     if section31_25 = "0000000" then
-                                             state_d <= S_SLT;
-                                     end if;
 			         end if;
 
-		    	when "1100011" => -- type B
-		    		if section14_12 = "000" then
-		    			state_d <= S_BEQ;
-                                 elsif section14_12 = "001" then
-                                         state_d <= S_BEQ;
-                                 elsif section14_12 = "100" then
-                                         state_d <= S_BEQ;
-                                 elsif section14_12 = "101" then
-                                          state_d <= S_BEQ;
-			    	end if;
-
-
-                        when "0100011" => -- type S
-                                if section14_12 = "010" then
-                                        state_d <= S_SW;
-                                end if;
-
-
+		
 				
-                when other =>
+                when others =>
                     state_d <= S_Error; -- Pour detecter les rates du decodage
                 end case;
 
