@@ -116,20 +116,20 @@ begin
     begin
 
         -- Valeurs par défaut de cmd à définir selon les préférences de chacun
-        cmd.rst               <= 'U';
-        cmd.ALU_op            <= UNDEFINED;
-        cmd.LOGICAL_op        <= UNDEFINED;
-        cmd.ALU_Y_sel         <= UNDEFINED;
+        cmd.rst               <= '0';
+        cmd.ALU_op            <= ALU_plus;
+        cmd.LOGICAL_op        <= LOGICAL_and;
+        cmd.ALU_Y_sel         <= ALU_Y_immI;
 
-        cmd.SHIFTER_op        <= UNDEFINED;
-        cmd.SHIFTER_Y_sel     <= UNDEFINED;
+        cmd.SHIFTER_op        <= SHIFT_ll;
+        cmd.SHIFTER_Y_sel     <= SHIFTER_Y_rs2;
 
-        cmd.RF_we             <= 'U';
+        cmd.RF_we             <= '0';
         cmd.RF_SIZE_sel       <= UNDEFINED;
-        cmd.RF_SIGN_enable    <= 'U';
+        cmd.RF_SIGN_enable    <= '0';
         cmd.DATA_sel          <= UNDEFINED;
 
-        cmd.PC_we             <= 'U';
+        cmd.PC_we             <= '0';
         cmd.PC_sel            <= UNDEFINED;
 
         cmd.PC_X_sel          <= PC_X_pc;
@@ -137,14 +137,14 @@ begin
 
         cmd.TO_PC_Y_sel       <= UNDEFINED;
 
-        cmd.AD_we             <= 'U';
+        cmd.AD_we             <= '0';
         cmd.AD_Y_sel          <= UNDEFINED;
 
-        cmd.IR_we             <= 'U';
+        cmd.IR_we             <= '0';
 
         cmd.ADDR_sel          <= ADDR_from_pc;
-        cmd.mem_we            <= 'U';
-        cmd.mem_ce            <= 'U';
+        cmd.mem_we            <= '0';
+        cmd.mem_ce            <= '0';
 
         cmd_cs.CSR_we            <= UNDEFINED;
 
@@ -152,8 +152,8 @@ begin
         cmd_cs.CSR_sel           <= UNDEFINED;
         cmd_cs.MEPC_sel          <= UNDEFINED;
 
-        cmd_cs.MSTATUS_mie_set   <= 'U';
-        cmd_cs.MSTATUS_mie_reset <= 'U';
+        cmd_cs.MSTATUS_mie_set   <= '0';
+        cmd_cs.MSTATUS_mie_reset <= '0';
 
         cmd_cs.CSR_WRITE_mode    <= UNDEFINED;
 
@@ -205,7 +205,7 @@ when S_LUI =>
     -- lecture mem[PC]
     cmd.ADDR_sel <= ADDR_from_pc;
     cmd.mem_ce <= '1';
-    cmd.mem_we <= '1';
+    cmd.mem_we <= '0';
     -- next state
     state_d <= S_Fetch;
 
