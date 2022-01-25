@@ -482,7 +482,7 @@ when S_BEQ =>
 			cmd.TO_PC_Y_SEL <= TO_PC_Y_cst_x04;
 	end case;
     
-    cmd.PC_sel <= PC_from_pc
+    cmd.PC_sel <= PC_from_pc;
     cmd.PC_we <= '1'
     state_d <= S_Fetch;
 
@@ -496,7 +496,7 @@ when S_BNE =>
         end case;
     cmd.PC_sel <= PC_from_pc;
     cmd.PC_we <= '1';
-    state_d <= S_Fetch
+    state_d <= S_Fetch;
 
 when S_BLT =>
     case status.JCOND is
@@ -507,7 +507,7 @@ when S_BLT =>
         end case;
     cmd.PC_sel <= PC_from_pc;
     cmd.PC_we <= '1';
-    state_d <= S_Fetch
+    state_d <= S_Fetch;
 
 
 when S_SLT =>
@@ -519,7 +519,7 @@ when S_SLT =>
     
     --then in the register
     cmd.RF_we <= '1';
-    state_d <= S_Fetch
+    state_d <= S_Fetch;
             
 
 ---------- Instructions de chargement à partir de la mémoire ----------
