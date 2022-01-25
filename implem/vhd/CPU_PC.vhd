@@ -52,6 +52,7 @@ architecture RTL of CPU_PC is
         S_BLT,
         S_BNE,
         S_SLT,
+        S_SLTI
         S_JAL,
         S_BGE
     
@@ -217,6 +218,8 @@ begin
 				            state_d <= S_ANDI;
 			            elsif status.IR(14 downto 12) = "100" then
 				            state_d <= S_XORI;
+                        elsif status.IR(14 downto 12) = "010" then
+                            stat_d <= S_SLTI
                         end if;
 
 			    elsif status.IR(6 downto 0)="0110011" then
