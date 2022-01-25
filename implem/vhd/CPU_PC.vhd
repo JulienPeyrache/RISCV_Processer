@@ -52,7 +52,7 @@ architecture RTL of CPU_PC is
         S_BLT,
         S_BNE,
         S_SLT,
-        S_SLTI
+        S_SLTI,
         S_JAL,
         S_JALR,
         S_BGE
