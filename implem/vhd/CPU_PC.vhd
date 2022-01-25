@@ -52,7 +52,8 @@ architecture RTL of CPU_PC is
         S_BLT,
         S_BNE,
         S_SLT,
-        S_JAL
+        S_JAL,
+        S_BGE
     
         );
 
@@ -485,6 +486,19 @@ when S_XORI =>
 ---------- Instructions de saut ----------
 
 when S_BEQ =>
+    case status.JCOND is
+		when true =>
+			cmd.TO_PC_Y_sel <= TO_PC_Y_immB;
+		when others =>
+			cmd.TO_PC_Y_SEL <= TO_PC_Y_cst_x04;
+	end case;
+    
+    cmd.PC_sel <= PC_from_pc;
+    cmd.PC_we <= '1';
+    state_d <= S_Fetch;
+
+
+when S_BGE =>
     case status.JCOND is
 		when true =>
 			cmd.TO_PC_Y_sel <= TO_PC_Y_immB;
