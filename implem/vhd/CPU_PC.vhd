@@ -51,7 +51,8 @@ architecture RTL of CPU_PC is
         S_BEQ,
         S_BLT,
         S_BNE,
-        S_SLT
+        S_SLT,
+        S_BLT
     
         );
 
