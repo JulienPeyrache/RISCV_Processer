@@ -58,9 +58,6 @@ architecture RTL of CPU_PC is
 
     signal state_d, state_q : State_type;
     signal cmd_cs : PO_cs_cmd;
-    alias section31_25 is status.IR(31 downto 25);
-    alias section14_12 is status.IR(14 downto 12);
-    alias section6_0 is status.IR(6 downto 0);
 
 
     function arith_sel (IR : unsigned( 31 downto 0 ))
@@ -195,59 +192,59 @@ begin
                 cmd.PC_sel <= PC_from_pc;
                 cmd.PC_we <= '0';
 
-            case section6_0 is
+            case status.IR(6 downto 0) is
 			    when "0110111" =>
 			    	state_d <= S_LUI;
                 when "0010111" =>
                         state_d <= S_AUIPC;
 			    when "0010011" => --type I
-                        if section14_12 = "000" then
+                        if status.IR(14 downto 12) = "000" then
 				            state_d <= S_ADDI;
-            	        elsif section14_12 = "101" then
-				            if section31_25 = "0000000" then
+            	        elsif status.IR(14 downto 12) = "101" then
+				            if status.IR(31 downto 25) = "0000000" then
 					            state_d <= S_SRLI;
-			                elsif section31_25 = "0100000" then
+			                elsif status.IR(31 downto 25) = "0100000" then
 					            state_d <= S_SRAI;
 				            end if;
-			            elsif section14_12 = "001" then
-				            if section31_25 = "0000000" then
+			            elsif status.IR(14 downto 12) = "001" then
+				            if status.IR(31 downto 25) = "0000000" then
 					            state_d <= S_SLLI;
 				            end if;
-			            elsif section14_12 = "110" then
+			            elsif status.IR(14 downto 12) = "110" then
 				            state_d <= S_ORI;
-		                elsif section14_12 = "111" then
+		                elsif status.IR(14 downto 12) = "111" then
 				            state_d <= S_ANDI;
-			            elsif section14_12 = "100" then
+			            elsif status.IR(14 downto 12) = "100" then
 				            state_d <= S_XORI;
                         end if;
 
 			    when "0110011" => --type R
-			        if section14_12 = "000" then
-			    	    if section31_25 = "0000000" then
+			        if status.IR(14 downto 12) = "000" then
+			    	    if status.IR(31 downto 25) = "0000000" then
 			    		     state_d <= S_ADD;
-			            elsif section31_25 = "0100000" then
+			            elsif status.IR(31 downto 25) = "0100000" then
 				    	    state_d <= S_SUB; 
 				        end if;
-			        elsif section14_12 = "111" then
-				        if section31_25 = "0000000" then
+			        elsif status.IR(14 downto 12) = "111" then
+				        if status.IR(31 downto 25) = "0000000" then
 				    	    state_d <= S_AND;
 				        end if;
-			        elsif section14_12 = "110" then
-				        if section31_25 = "0000000" then
+			        elsif status.IR(14 downto 12) = "110" then
+				        if status.IR(31 downto 25) = "0000000" then
 				    	    state_d <= S_OR;
 				        end if;
-			        elsif section14_12 = "100" then
-				        if section31_25 = "0000000" then
+			        elsif status.IR(14 downto 12) = "100" then
+				        if status.IR(31 downto 25) = "0000000" then
                             state_d <= S_XOR;
                         end if;
-			        elsif section14_12 = "101" then
-				        if section31_25 = "0000000" then
+			        elsif status.IR(14 downto 12) = "101" then
+				        if status.IR(31 downto 25) = "0000000" then
 				    	    state_d <= S_SRL;
-				        elsif section31_25 = "0100000" then
+				        elsif status.IR(31 downto 25) = "0100000" then
 				    	    state_d <= S_SRA;
 				        end if;
-			        elsif section14_12 = "001" then
-				        if section31_25 = "0000000" then
+			        elsif status.IR(14 downto 12) = "001" then
+				        if status.IR(31 downto 25) = "0000000" then
 				    	    state_d <= S_SLL;
 				        end if;
 			        end if;
