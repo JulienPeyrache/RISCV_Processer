@@ -195,59 +195,56 @@ begin
                 when "0010111" =>
                         state_d <= S_AUIPC;
 			    when "0010011" => --type I
-                         if section14_12 = "000" then
-				    state_d <= S_ADDI;
-            	    	    elsif section14_12 = "101" then
-				     if section31_25 = "0000000" then
-					        state_d <= S_SRLI;
-			             elsif section31_25 = "0100000" then
-					        state_d <= S_SRAI;
-				      end if;
-			        elsif section14_12 = "001" then
-				        if section31_25 = "0000000" then
-					        state_d <= S_SLLI;
-				     end if;
-			     elsif section14_12 = "110" then
-				      state_d <= S_ORI;
-		              elsif section14_12 = "111" then
-				       state_d <= S_ANDI;
-			        elsif section14_12 = "100" then
-				        state_d <= S_XORI;
-                    end if;
-
-
-    
+                        if section14_12 = "000" then
+				            state_d <= S_ADDI;
+            	        elsif section14_12 = "101" then
+				            if section31_25 = "0000000" then
+					            state_d <= S_SRLI;
+			                elsif section31_25 = "0100000" then
+					            state_d <= S_SRAI;
+				            end if;
+			            elsif section14_12 = "001" then
+				            if section31_25 = "0000000" then
+					            state_d <= S_SLLI;
+				            end if;
+			            elsif section14_12 = "110" then
+				            state_d <= S_ORI;
+		                elsif section14_12 = "111" then
+				            state_d <= S_ANDI;
+			            elsif section14_12 = "100" then
+				            state_d <= S_XORI;
+                        end if;
 
 			    when "0110011" => --type R
 			        if section14_12 = "000" then
-			    	     if section31_25 = "0000000" then
+			    	    if section31_25 = "0000000" then
 			    		     state_d <= S_ADD;
-			                 elsif section31_25 = "0100000" then
+			            elsif section31_25 = "0100000" then
 				    	    state_d <= S_SUB; 
-				         end if;
-			      elsif section14_12 = "111" then
-				         if section31_25 = "0000000" then
-				    	     state_d <= S_AND;
-				         end if;
-			       elsif section14_12 = "110" then
-				         if section31_25 = "0000000" then
-				    	     state_d <= S_OR;
-				         end if;
-			      elsif section14_12 = "100" then
-				         if section31_25 = "0000000" then
+				        end if;
+			        elsif section14_12 = "111" then
+				        if section31_25 = "0000000" then
+				    	    state_d <= S_AND;
+				        end if;
+			        elsif section14_12 = "110" then
+				        if section31_25 = "0000000" then
+				    	    state_d <= S_OR;
+				        end if;
+			        elsif section14_12 = "100" then
+				        if section31_25 = "0000000" then
                             state_d <= S_XOR;
                         end if;
 			        elsif section14_12 = "101" then
-				         if section31_25 = "0000000" then
-				    	     state_d <= S_SRL;
-				         elsif section31_25 = "0100000" then
-				    	     state_d <= S_SRA;
-				        end if;
-			      elsif section14_12 = "001" then
 				        if section31_25 = "0000000" then
-				    	     state_d <= S_SLL;
-				       end if;
-			         end if;
+				    	    state_d <= S_SRL;
+				        elsif section31_25 = "0100000" then
+				    	    state_d <= S_SRA;
+				        end if;
+			        elsif section14_12 = "001" then
+				        if section31_25 = "0000000" then
+				    	    state_d <= S_SLL;
+				        end if;
+			        end if;
 				
                 when others =>
                     state_d <= S_Error; -- Pour detecter les rates du decodage
