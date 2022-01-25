@@ -204,7 +204,7 @@ when S_LUI =>
     cmd.RF_we <= '1'; 
     -- lecture mem[PC]
     cmd.mem_ce <= '1';
-    cmd.mem_we <= '0';
+    cmd.mem_we <= '1';
     -- next state
     state_d <= S_Fetch;
 
