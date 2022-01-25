@@ -250,7 +250,7 @@ begin
 				
                 else then
                     state_d <= S_Error; -- Pour detecter les rates du decodage
-                end case;
+                end if;
 
 ---------- Instructions avec immediat de type U ----------
 
