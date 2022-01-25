@@ -248,7 +248,7 @@ begin
 				        end if;
 			        end if;
 				
-                when others =>
+                else then
                     state_d <= S_Error; -- Pour detecter les rates du decodage
                 end case;
 
