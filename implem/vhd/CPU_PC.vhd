@@ -192,12 +192,11 @@ begin
                 cmd.PC_sel <= PC_from_pc;
                 cmd.PC_we <= '0';
 
-            case status.IR(6 downto 0) is
-			    when "0110111" =>
+            if status.IR(6 downto 0)="0110111" then
 			    	state_d <= S_LUI;
-                when "0010111" =>
+            elsif status.IR(6 downto 0)="0010111" then
                         state_d <= S_AUIPC;
-			    when "0010011" => --type I
+		    elsif status.IR(6 downto 0)= "0010011" then
                         if status.IR(14 downto 12) = "000" then
 				            state_d <= S_ADDI;
             	        elsif status.IR(14 downto 12) = "101" then
@@ -218,7 +217,7 @@ begin
 				            state_d <= S_XORI;
                         end if;
 
-			    when "0110011" => --type R
+			    elsif status.IR(6 downto 0)="0110011" then
 			        if status.IR(14 downto 12) = "000" then
 			    	    if status.IR(31 downto 25) = "0000000" then
 			    		     state_d <= S_ADD;
