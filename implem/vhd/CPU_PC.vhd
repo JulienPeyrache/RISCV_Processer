@@ -212,16 +212,11 @@ begin
 		              elsif section14_12 = "111" then
 				       state_d <= S_ANDI;
 			        elsif section14_12 = "100" then
-				     state_d <= S_XORI;
-                               elsif section14_12 = "010" then
-                                       state_d <= S_SLTI;
-                               end if;
+				        state_d <= S_XORI;
+                    end if;
 
 
-                        when "0000011" => -- type I for load
-                            if section14_12 = "010" then
-                                    state_d <= S_LW;
-                            end if;
+    
 
 			    when "0110011" => --type R
 			        if section14_12 = "000" then
