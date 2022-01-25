@@ -51,7 +51,9 @@ architecture RTL of CPU_PC is
         S_BEQ,
         S_BLT,
         S_BNE,
-        S_SLT
+        S_SLT,
+        S_BLT,
+        S_JAL
     
         );
 
@@ -519,7 +521,6 @@ when S_SLT =>
     
     --then in the register
     cmd.RF_we <= '1';
-<<<<<<< HEAD
     state_d <= S_Fetch;
 
 when S_JAL =>
@@ -540,9 +541,6 @@ when S_JAL =>
     state_d <= S_Fetch;
 
 
-=======
-    state_d <= S_Fetch;
->>>>>>> 98345c153be438414eb481f2766123014ef79a3d
             
 
 ---------- Instructions de chargement à partir de la mémoire ----------
