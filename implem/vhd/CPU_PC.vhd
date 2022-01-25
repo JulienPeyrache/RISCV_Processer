@@ -257,6 +257,8 @@ begin
 			        end if;
                 elsif status.IR(6 downto 0) = "1101111" then
                     state_d <= S_JAL;
+                elsif status.IR(6 downto 0) = "1100111" then
+                    state_d <= S_JALR;
 				elsif status.IR(6 downto 0)="1100011" then
                     if status.IR(14 downto 12)="000" then
                         state_d <= S_BEQ;
