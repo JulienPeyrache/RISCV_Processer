@@ -60,7 +60,12 @@ Début du Read me :
 Se placer dans le implem
 
 Dans la ligne de commande, il faut changer la source : source /tools/Xilinx/Vivado/2019.1/settings64.sh
-Description des étapes.
-Ajout de certaines valeurs.
-Ajout du fichier addi.s à l'aide de git.
+Description des étapes : 
+
+- initialisation de certaines valeurs dans le fichier CPU_PC.vhd, notamment celles .we et .ce afin de permettre à chaque instruction d'avoir lieu.
+
+- ajout des fonctions
+
+
+
 
