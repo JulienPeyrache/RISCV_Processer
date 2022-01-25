@@ -47,7 +47,12 @@ architecture RTL of CPU_PC is
         S_OR,
         S_ORI,
         S_XOR,
-        S_XORI
+        S_XORI,
+        S_BEQ,
+        S_BLT,
+        S_BNE,
+        S_SLT
+    
         );
 
     signal state_d, state_q : State_type;
@@ -523,7 +528,7 @@ when S_SLT =>
 
 ---------- Instructions d'accès aux CSR ----------
 
-            when others => null;
+ when others => null;
         end case;
 
     end process FSM_comb;
