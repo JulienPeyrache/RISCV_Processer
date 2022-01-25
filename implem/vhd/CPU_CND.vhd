@@ -21,5 +21,5 @@ end entity;
 
 architecture RTL of CPU_CND is
 
-begin
+begin  
 end architecture;
