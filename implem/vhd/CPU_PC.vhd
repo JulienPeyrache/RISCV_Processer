@@ -192,8 +192,8 @@ begin
             case section6_0 is
 			    when "0110111" =>
 			    	state_d <= S_LUI;
-                         when "0010111" =>
-                              state_d <= S_AUIPC;
+                when "0010111" =>
+                        state_d <= S_AUIPC;
 			    when "0010011" => --type I
                          if section14_12 = "000" then
 				    state_d <= S_ADDI;
