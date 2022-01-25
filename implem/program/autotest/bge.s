@@ -1,7 +1,7 @@
 # TAG = bge
 	.text
 
-	addi x1, x0, 5       #Test chargement d'une valeur nulle
+	addi x1, x0, 5       
 	addi x2, x0, 2
 	bge x1, x2, ge
 	addi x31, x0, 1

@@ -1,4 +1,4 @@
-# TAG = xor 
+# TAG = or 
     .text
 
     addi x1, x0, 9        
@@ -7,6 +7,5 @@
 
     #max_cycle 50
     #pout_start
-    #00000003
+    #0000000B
     #pout_end
-    
