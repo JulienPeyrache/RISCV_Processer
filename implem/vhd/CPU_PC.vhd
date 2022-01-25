@@ -546,6 +546,19 @@ when S_SLT =>
     
     --then in the register
     cmd.RF_we <= '1';
+    cmd.mem_ce <= '1';
+    state_d <= S_Fetch;
+
+
+when S_SLTI =>
+    --we compare rs1 to the right value
+    cmd.ALU_Y_sel <= ALU_Y_immI;
+    --Now we have the right value we take 0 or 1 depending on the validation of the test
+    cmd.DATA_sel <= DATA_from_slt;
+    
+    --then in the register
+    cmd.RF_we <= '1';
+    cmd.mem_ce <= '1';
     state_d <= S_Fetch;
 
 when S_JAL =>
