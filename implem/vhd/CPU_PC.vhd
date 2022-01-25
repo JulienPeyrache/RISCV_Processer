@@ -483,7 +483,7 @@ when S_BEQ =>
 	end case;
     
     cmd.PC_sel <= PC_from_pc;
-    cmd.PC_we <= '1',
+    cmd.PC_we <= '1';
     state_d <= S_Fetch;
 
 
