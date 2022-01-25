@@ -135,7 +135,7 @@ begin
         cmd.PC_X_sel          <= PC_X_pc;
         cmd.PC_Y_sel          <= PC_Y_immU;
 
-        cmd.TO_PC_Y_sel       <= UNDEFINED;
+        cmd.TO_PC_Y_sel       <= TO_PC_Y_immB;
 
         cmd.AD_we             <= '0';
         cmd.AD_Y_sel          <= UNDEFINED;
@@ -181,16 +181,102 @@ begin
 
 
             when S_Decode =>
-                -- On peut aussi utiliser un case, ...
-                -- et ne pas le faire juste pour les branchements et auipc
-                if status.IR(6 downto 0) = "0110111" then
-                    cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
-                    cmd.PC_sel <= PC_from_pc;
-                    cmd.PC_we <= '0'; 
-                    state_d <= S_LUI;
-                else
+                -- PC<- PC+4
+                cmd.TO_PC_Y_sel <= TO_PC_Y_cst_x04;
+                cmd.PC_sel <= PC_from_pc;
+                cmd.PC_we <= '0';
+
+            case status.IR(6 downto 0) is
+			    when "0110111" =>
+			    	state_d <= S_LUI;
+                         when "0010111" =>
+                              state_d <= S_AUIPC;
+			    when "0010011" => --type I
+                         if funct3 = "000" then
+				    state_d <= S_ADDI;
+            	    	    elsif funct3 = "101" then
+				     if funct7 = "0000000" then
+					        state_d <= S_SRLI;
+			             elsif funct7 = "0100000" then
+					        state_d <= S_SRAI;
+				      end if;
+			        elsif funct3 = "001" then
+				        if funct7 = "0000000" then
+					        state_d <= S_SLLI;
+				     end if;
+			     elsif funct3 = "110" then
+				      state_d <= S_ORI;
+		              elsif funct3 = "111" then
+				       state_d <= S_ANDI;
+			        elsif funct3 = "100" then
+				     state_d <= S_XORI;
+                               elsif funct3 = "010" then
+                                       state_d <= S_SLTI;
+                               end if;
+
+
+                        when "0000011" => -- type I for load
+                            if funct3 = "010" then
+                                    state_d <= S_LW;
+                            end if;
+
+			    when "0110011" => --type R
+			        if funct3 = "000" then
+			    	     if funct7 = "0000000" then
+			    		     state_d <= S_ADD;
+			                 elsif funct7 = "0100000" then
+				    	    state_d <= S_SUB; 
+				         end if;
+			      elsif funct3 = "111" then
+				         if funct7 = "0000000" then
+				    	     state_d <= S_AND;
+				         end if;
+			       elsif funct3 = "110" then
+				         if funct7 = "0000000" then
+				    	     state_d <= S_OR;
+				         end if;
+			      elsif funct3 = "100" then
+				         if funct7 = "0000000" then
+                            state_d <= S_XOR;
+                        end if;
+			        elsif funct3 = "101" then
+				         if funct7 = "0000000" then
+				    	     state_d <= S_SRL;
+				         elsif funct7 = "0100000" then
+				    	     state_d <= S_SRA;
+				        end if;
+			      elsif funct3 = "001" then
+				        if funct7 = "0000000" then
+				    	     state_d <= S_SLL;
+				       end if;
+                               elsif funct3 = "010" then
+                                     if funct7 = "0000000" then
+                                             state_d <= S_SLT;
+                                     end if;
+			         end if;
+
+		    	when "1100011" => -- type B
+		    		if funct3 = "000" then
+		    			state_d <= S_BEQ;
+                                 elsif funct3 = "001" then
+                                         state_d <= S_BEQ;
+                                 elsif funct3 = "100" then
+                                         state_d <= S_BEQ;
+                                 elsif funct3 = "101" then
+                                          state_d <= S_BEQ;
+			    	end if;
+
+
+                        when "0100011" => -- type S
+                                if funct3 = "010" then
+                                        state_d <= S_SW;
+                                end if;
+
+
+				
+                when other =>
                     state_d <= S_Error; -- Pour detecter les rates du decodage
-                end if;
+                end case;
 
 ---------- Instructions avec immediat de type U ----------
 
