@@ -492,8 +492,31 @@ when S_BNE =>
         when others =>
             cmd.TO_PC_Y_SEL <= TO_PC_Y_cst_x04;
         end case;
-    cmd.PC_sel <= PC_from_pc
-    cmd.PC_we <= '1'
+    cmd.PC_sel <= PC_from_pc;
+    cmd.PC_we <= '1';
+    state_d <= S_Fetch
+
+when S_BLT =>
+    case status.JCOND is
+        when true =>
+            cmd.TO_PC_Y_sel <= TO_PC_Y_immB;
+        when others =>
+            cmd.TO_PC_Y_SEL <= TO_PC_Y_cst_x04;
+        end case;
+    cmd.PC_sel <= PC_from_pc;
+    cmd.PC_we <= '1';
+    state_d <= S_Fetch
+
+
+when S_SLT =>
+    --we compare rs1 to the right value
+    cmd.ALU_Y_sel <= ALU_Y_rf_rs2
+    
+    --Now we have the right value we take 0 or 1 depending on the validation of the test
+    cmd.DATA_sel <= DATA_from_slt
+    
+    --then in the register
+    cmd.RF_we <= '1'
     state_d <= S_Fetch
             
 
