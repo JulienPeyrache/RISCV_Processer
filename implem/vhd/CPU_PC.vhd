@@ -510,13 +510,13 @@ when S_BLT =>
 
 when S_SLT =>
     --we compare rs1 to the right value
-    cmd.ALU_Y_sel <= ALU_Y_rf_rs2
+    cmd.ALU_Y_sel <= ALU_Y_rf_rs2;
     
     --Now we have the right value we take 0 or 1 depending on the validation of the test
-    cmd.DATA_sel <= DATA_from_slt
+    cmd.DATA_sel <= DATA_from_slt;
     
     --then in the register
-    cmd.RF_we <= '1'
+    cmd.RF_we <= '1';
     state_d <= S_Fetch
             
 
