@@ -47,7 +47,12 @@ architecture RTL of CPU_PC is
         S_OR,
         S_ORI,
         S_XOR,
-        S_XORI
+        S_XORI,
+        S_BEQ,
+        S_BLT,
+        S_BNE,
+        S_SLT
+    
         );
 
     signal state_d, state_q : State_type;
@@ -477,8 +482,8 @@ when S_BEQ =>
 			cmd.TO_PC_Y_SEL <= TO_PC_Y_cst_x04;
 	end case;
     
-    cmd.PC_sel <= PC_from_pc
-    cmd.PC_we <= '1'
+    cmd.PC_sel <= PC_from_pc;
+    cmd.PC_we <= '1';
     state_d <= S_Fetch;
 
 
@@ -491,7 +496,7 @@ when S_BNE =>
         end case;
     cmd.PC_sel <= PC_from_pc;
     cmd.PC_we <= '1';
-    state_d <= S_Fetch
+    state_d <= S_Fetch;
 
 when S_BLT =>
     case status.JCOND is
@@ -502,7 +507,7 @@ when S_BLT =>
         end case;
     cmd.PC_sel <= PC_from_pc;
     cmd.PC_we <= '1';
-    state_d <= S_Fetch
+    state_d <= S_Fetch;
 
 
 when S_SLT =>
@@ -514,6 +519,7 @@ when S_SLT =>
     
     --then in the register
     cmd.RF_we <= '1';
+<<<<<<< HEAD
     state_d <= S_Fetch
 
 when S_JAL =>
@@ -534,6 +540,9 @@ when S_JAL =>
     state_d <= S_Fetch
 
 
+=======
+    state_d <= S_Fetch;
+>>>>>>> 98345c153be438414eb481f2766123014ef79a3d
             
 
 ---------- Instructions de chargement à partir de la mémoire ----------
@@ -542,7 +551,7 @@ when S_JAL =>
 
 ---------- Instructions d'accès aux CSR ----------
 
-            when others => null;
+ when others => null;
         end case;
 
     end process FSM_comb;
