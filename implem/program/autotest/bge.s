@@ -7,8 +7,8 @@
 	addi x31, x0, 1
 
 ge:
-	addi x31, x0, 0
+	addi x31, x0, 3
 	# max_cycle 50
 	# pout_start
-	# 00000000
+	# 00000003
 	# pout_end
