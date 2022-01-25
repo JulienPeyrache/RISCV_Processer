@@ -472,6 +472,18 @@ when S_XORI =>
 
 ---------- Instructions de saut ----------
 
+when S_BEQ =>
+    case status.JCOND is
+			when true =>
+				cmd.TO_PC_Y_sel <= TO_PC_Y_immB;
+			when others =>
+				cmd.TO_PC_Y_SEL <= TO_PC_Y_cst_x04;
+		end case;
+    
+    cmd.PC_sel <= PC_from_pc
+    cmd.PC_we <= '1'
+    state_d <= S_Fetch;
+
 ---------- Instructions de chargement à partir de la mémoire ----------
 
 ---------- Instructions de sauvegarde en mémoire ----------
