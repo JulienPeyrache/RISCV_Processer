@@ -520,7 +520,7 @@ when S_SLT =>
     --then in the register
     cmd.RF_we <= '1';
 <<<<<<< HEAD
-    state_d <= S_Fetch
+    state_d <= S_Fetch;
 
 when S_JAL =>
     --first we need to select the right values for the addition
@@ -537,7 +537,7 @@ when S_JAL =>
     cmd.PC_sel <= PC_from_pc;
 
     cmd.PC_we <= '1';
-    state_d <= S_Fetch
+    state_d <= S_Fetch;
 
 
 =======
