@@ -54,6 +54,7 @@ architecture RTL of CPU_PC is
         S_SLT,
         S_SLTI
         S_JAL,
+        S_JALR,
         S_BGE
     
         );
@@ -580,6 +581,25 @@ when S_JAL =>
 
     cmd.PC_we <= '1';
     state_d <= S_Fetch;
+
+when S_JALR =>
+    --first we need to select the right values for the addition
+    cmd.PC_X_sel <= PC_X_pc;
+    cmd.PC_Y_sel <= PC_Y_cst_x04;
+
+    --then we put it in the rd register
+    cmd.DATA_sel <= DATA_from_pc;
+    cmd.RF_we <= '1';
+
+    --then we take the immI value and add it to rs1
+    cmd.ALU_Y_sel <= ALU_Y_immI;
+    cmd.ALU_op <= ALU_plus;
+
+    --now we assign this value to pc
+    cmd.PC_sel <= PC_from_alu;
+    cmd.PC_we <= '1';
+    state_d <= S_Fetch;
+
 
 
             
