@@ -248,8 +248,6 @@ begin
 				    	     state_d <= S_SLL;
 				       end if;
 			         end if;
-
-		
 				
                 when others =>
                     state_d <= S_Error; -- Pour detecter les rates du decodage
