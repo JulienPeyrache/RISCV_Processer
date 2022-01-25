@@ -515,6 +515,25 @@ when S_SLT =>
     --then in the register
     cmd.RF_we <= '1';
     state_d <= S_Fetch
+
+when S_JAL =>
+    --first we need to select the right values for the addition
+    cmd.PC_X_sel <= PC_X_pc;
+    cmd.PC_Y_sel <= PC_Y_cst_x04;
+
+    --then we put it in the rd register
+    cmd.DATA_sel <= DATA_from_pc;
+    cmd.RF_we <= '1';
+
+    --you get the constant from immJ because it is a jump instruction
+    cmd.TO_PC_Y_SEL <= TO_PC_Y_immJ;
+    --after the addition pc + cst you assign the value to pc
+    cmd.PC_sel <= PC_from_pc;
+
+    cmd.PC_we <= '1';
+    state_d <= S_Fetch
+
+
             
 
 ---------- Instructions de chargement à partir de la mémoire ----------
