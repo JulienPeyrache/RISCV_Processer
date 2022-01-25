@@ -248,7 +248,19 @@ begin
 				    	    state_d <= S_SLL;
 				        end if;
 			        end if;
-				
+				elsif status.IR(6 downto 0)="1100011" then
+                    if status.IR(14 downto 12)="000" then
+                        state_d <= S_BEQ;
+                    elsif status.IR(14 downto 12)="001" then
+                        state_d <= S_BNE;
+                    elsif status.IR(14 downto 12)="100" then
+                        state_d <= S_BLT;
+                    --elsif status.IR(14 downto 12)="101" then
+                     --   state_d <= S_BGE;
+                    else
+                        state_d <= S_Error;
+                    end if;
+
                 else
                     state_d <= S_Error; -- Pour detecter les rates du decodage
                 end if;
