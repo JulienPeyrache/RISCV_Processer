@@ -139,7 +139,7 @@ begin
         cmd.DATA_sel          <= UNDEFINED;
 
         cmd.PC_we             <= '0';
-        cmd.PC_sel            <= UNDEFINED;
+        cmd.PC_sel            <= PC_from_pc;
 
         cmd.PC_X_sel          <= PC_X_pc;
         cmd.PC_Y_sel          <= PC_Y_immU;
@@ -147,7 +147,7 @@ begin
         cmd.TO_PC_Y_sel       <= TO_PC_Y_immB;
 
         cmd.AD_we             <= '0';
-        cmd.AD_Y_sel          <= UNDEFINED;
+        cmd.AD_Y_sel          <= AD_Y_immI;
 
         cmd.IR_we             <= '0';
 
@@ -161,8 +161,8 @@ begin
         cmd_cs.CSR_sel           <= UNDEFINED;
         cmd_cs.MEPC_sel          <= UNDEFINED;
 
-        cmd_cs.MSTATUS_mie_set   <= '0';
-        cmd_cs.MSTATUS_mie_reset <= '0';
+        cmd_cs.MSTATUS_mie_set   <= 'U';
+        cmd_cs.MSTATUS_mie_reset <= 'U';
 
         cmd_cs.CSR_WRITE_mode    <= UNDEFINED;
 
@@ -288,30 +288,32 @@ when S_LUI =>
     -- lecture mem[PC]
     cmd.ADDR_sel <= ADDR_from_pc;
     cmd.mem_ce <= '1';
-    cmd.mem_we <= '0';
+   
     -- next state
     state_d <= S_Fetch;
 
 when S_ADDI =>
     --rd <- rs1 + immI
+    cmd.RF_we <= '1';
     cmd.ALU_Y_sel <= ALU_Y_immI;
     cmd.ALU_op <= ALU_plus;
     cmd.DATA_sel <= DATA_from_alu;
-    cmd.RF_we <= '1';
+    
     cmd.mem_ce <= '1';    
     --next state
     state_d <= S_Fetch;
 
 --AUIPC rd, imm : R[rd] = PC + (imm << 12)
 when S_AUIPC =>
+    cmd.RF_we <= '1';
     cmd.PC_X_sel <= PC_X_pc;
     cmd.PC_Y_sel <= PC_Y_immU;
     cmd.DATA_sel <= DATA_from_pc;
-    cmd.RF_we <= '1';
+    
     --PC take the value
     cmd.ADDR_sel <= ADDR_from_pc;
-    cmd.mem_ce <= '1';    
-    cmd.mem_we <= '1';    
+    cmd.mem_ce <= '1';
+
     -- next state
     state_d <= S_Fetch;
 
