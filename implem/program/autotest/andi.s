@@ -1,14 +1,15 @@
 # TAG = andi
 	.text
 
-	addi x1, x0, 9     
-	addi x2, x0, 10
-	addi x3, x0, 13
-	andi x31, x1, x2 
-	andi x31, x31, x3 
+	lui  x31, 0x55555     # On set un bit sur deux dans x31, poids fort ...
+	addi x31, x31, 0x555  # ... bits de poids faible
+	andi x31, x31, 0xFF   # And
+	andi x31, x31, 0      # And avec zero
 
 	# max_cycle 50
 	# pout_start
-	# 00000008
-	# 0000000D
+	# 55555000
+	# 55555555
+	# 00000055
+	# 00000000
 	# pout_end
