@@ -1,11 +1,13 @@
 # TAG = ori 
     .text
 
-    addi x1, x0, 9        
-    addi x2, x0, 10
-    ori x31, x1, x2        
+    lui  x31, 0xDEADB  # On va compléter les bits de poids faible
+	ori x31, x31, 0xEF # et voila (ok il y a un trou mais c'est à cause du signe extension)
+	ori x31, x31, -1   # On peut effacer ça maintenant
 
-    #max_cycle 50
-    #pout_start
-    #0000000B
-    #pout_end
+	# max_cycle 50
+	# pout_start
+	# DEADB000
+	# DEADB0EF
+	# FFFFFFFF
+	# pout_end

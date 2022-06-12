@@ -1,14 +1,19 @@
 #TAG = beq 
     .text
 
-	addi x1, x0, 5       
-	addi x2, x0, 2
-	beq x1, x2, eq
-	addi x31, x0, 1
+	addi x31, x0, 10
+	addi x30, x0, 5
+loop1:
+	beq x31, x30, exit
+	addi x31, x31, -1
+	beq x0, x0, loop1
+exit:
 
-eq:
-	addi x31, x0, 0
 	# max_cycle 50
 	# pout_start
-	# 00000001
-	# pout_end    
+	# 0000000A
+	# 00000009
+	# 00000008
+	# 00000007
+	# 00000006
+	# pout_end   
