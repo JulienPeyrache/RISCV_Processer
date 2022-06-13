@@ -220,7 +220,7 @@ begin
 			            elsif status.IR(14 downto 12) = "100" then
 				            state_d <= S_XORI;
                         elsif status.IR(14 downto 12) = "010" then
-                            stat_d <= S_SLTI;
+                            state_d <= S_SLTI;
                         end if;
 
 			    elsif status.IR(6 downto 0)="0110011" then
