@@ -11,11 +11,11 @@ AUIPC
 
 #LOGIQUES
 AND
-#NDI
-#OR
-#ORI
+ANDI
+OR
+ORI
 XOR
-#XORI
+XORI
 
 #SHIFTS
 SLL
@@ -27,12 +27,12 @@ SRAI
 
 #SETS
 SLT
-#SLTI
+SLTI
 #SLTU
 #SLTIU
 
 #LOADS
-LW
+#LW
 #LH
 #LHU
 #LB
@@ -44,16 +44,16 @@ LW
 #SB
 
 #SAUTS
-#JAL
-#JALR
+JAL
+JALR
 
 #BRANCHEMENTS
 BEQ
 BGE
-#BGEU
+BGEU
 BLT
-#BLTU
-#BNE
+BLTU
+BNE
 
 #Tests bidon pour illustrer une mauvaise couverture de test
 #BIDON
